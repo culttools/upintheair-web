@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0c1222" />
+  <title>Up In The Air — Meet people on your way</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="train-window" aria-hidden="true">
+    <div class="train-bg"></div>
+    <div class="train-sun"></div>
+    <div class="train-trees train-trees--back"><div class="train-trees-inner"></div></div>
+    <div class="train-trees train-trees--front"><div class="train-trees-inner"></div></div>
+    <div class="train-dapple"></div>
+  </div>
+  <header class="header">
+    <a href="index.html" class="logo">Up In The Air</a>
+    <nav class="nav">
+      <a href="stories.html">Stories</a>
+      <a href="blog.html">Blog</a>
+      <a href="about-the-app.html">The app</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Meet people<br />on your way.</h1>
+      <p class="hero-tagline">Upload your travel. Swipe on who’s on your layover, your flight, or your train. Match to a time and place—if you want to.</p>
+      <p class="hero-cta">
+        <a href="about-the-app.html" class="btn">How it works</a>
+        <a href="about-the-app.html#try" class="btn btn-secondary">Try the app</a>
+      </p>
+    </section>
+
+    <section class="strip">
+      <p>Same airport. Same train. Same layover. We only show you who’s <strong>on the way</strong>—never your exact flight. You choose whether to meet.</p>
+    </section>
+
+    <section class="section">
+      <h2>Stories from the way</h2>
+      <p style="text-align: center; color: var(--muted); margin-bottom: 0;">Real and speculative. People who met at airports, in lounges, after cancellations—and some who travelled the same route for years and never crossed paths.</p>
+      <div class="card-grid">
+        <a href="stories.html#airport" class="card">
+          <span class="card-meta">Airport</span>
+          <h3 class="card-title">The 47-minute layover</h3>
+          <p class="card-excerpt">We had one gate change in common. She said yes to coffee. I still think about that cinnamon roll.</p>
+        </a>
+        <a href="stories.html#train" class="card">
+          <span class="card-meta">Train</span>
+          <h3 class="card-title">Cancelled train, same platform</h3>
+          <p class="card-excerpt">Everyone was stressed. We started complaining to each other. Two hours later we were in a pub.</p>
+        </a>
+        <a href="stories.html#speculative" class="card">
+          <span class="card-meta">Speculative</span>
+          <h3 class="card-title">The same route for 12 years</h3>
+          <p class="card-excerpt">We’d both been taking the 7:14 to the city. We never met until the app.</p>
+        </a>
+      </div>
+      <p style="text-align: center; margin-top: 2rem;"><a href="stories.html" class="btn btn-secondary">More stories</a></p>
+    </section>
+
+    <section class="strip strip-alt">
+      <p>Planes and trains. Before, during, after. We match you from your schedule—you stay in control.</p>
+    </section>
+
+    <section class="section">
+      <h2>From the blog</h2>
+      <p style="text-align: center; color: var(--muted); margin-bottom: 2rem;">Travel, points, and the weird psychology of meeting in between.</p>
+      <div class="card-grid">
+        <a href="blog-combining-points.html" class="card">
+          <span class="card-meta">Travel</span>
+          <h3 class="card-title">Combining points and meeting people</h3>
+          <p class="card-excerpt">Why your layover strategy might be the best dating filter you never asked for.</p>
+        </a>
+        <a href="blog-romance-dead.html" class="card">
+          <span class="card-meta">Essay</span>
+          <h3 class="card-title">Is romance dead after the apps?</h3>
+          <p class="card-excerpt">Or just relocated to gate B12 and the 6:42 to Paddington?</p>
+        </a>
+        <a href="blog-behavioral-cues.html" class="card">
+          <span class="card-meta">Behavior</span>
+          <h3 class="card-title">Dating when nothing’s guaranteed</h3>
+          <p class="card-excerpt">Behavioral cues in situations where you might never see each other again.</p>
+        </a>
+      </div>
+      <p style="text-align: center; margin-top: 2rem;"><a href="blog.html" class="btn btn-secondary">All posts</a></p>
+    </section>
+
+    <section id="coming" class="section cta-block">
+      <h2>Get early access</h2>
+      <p>We’re building the full experience: sign up, add trips, swipe, match, and meet. Drop your email and we’ll tell you when it’s live.</p>
+      <form class="email-form" action="#" method="get" id="notify">
+        <input type="email" name="email" placeholder="you@example.com" required aria-label="Email" />
+        <button type="submit" class="btn">Notify me</button>
+      </form>
+      <p class="note">No spam. Just one email when the app is ready.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Up In The Air — Meet people on your way. By <a href="about.html" style="color: var(--accent);">Cult</a>.</p>
+    <nav class="nav">
+      <a href="stories.html">Stories</a>
+      <a href="blog.html">Blog</a>
+      <a href="about-the-app.html">The app</a>
+      <a href="about.html">About</a>
+    </nav>
+  </footer>
+
+  <script>
+    document.getElementById('notify').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = this.email.value;
+      if (email) {
+        this.querySelector('button').textContent = 'Thanks!';
+        this.email.disabled = true;
+      }
+    });
+  </script>
+</body>
+</html>

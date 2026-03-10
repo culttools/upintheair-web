@@ -1,0 +1,646 @@
+:root {
+  --bg: #0b0f14;
+  --bg-soft: #0e1218;
+  --surface: #11151b;
+  --surface-hover: #1a2332;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --accent: #f59e0b;
+  --accent-soft: rgba(245, 158, 11, 0.15);
+  --font-display: 'Syne', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Train window: sun through trees — warm light + moving shadow forms */
+.train-window {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Sun: warm glow coming through the “window” */
+.train-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+}
+
+.train-sun {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 120% 80% at 35% 40%,
+      rgba(251, 191, 36, 0.35) 0%,
+      rgba(245, 158, 11, 0.2) 25%,
+      rgba(245, 158, 11, 0.08) 50%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 80% 60% at 70% 60%,
+      rgba(253, 186, 116, 0.15) 0%,
+      transparent 50%
+    );
+}
+
+/* Tree shadows: dark bands with soft edges. Transparent = gap where light comes through. */
+.train-trees {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.train-trees-inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 200%;
+  will-change: transform;
+}
+
+/* Back trees: slower, softer, wider “trunks” */
+/* Repeat unit = 50% of inner (= 1 viewport) for seamless loop */
+.train-trees--back .train-trees-inner {
+  background-size: 50% 100%;
+  background-repeat: repeat-x;
+  background-image:
+    linear-gradient(90deg,
+      transparent 0%, transparent 12%,
+      rgba(0, 0, 0, 0.5) 18%, rgba(0, 0, 0, 0.65) 22%, rgba(0, 0, 0, 0.5) 28%,
+      transparent 35%, transparent 48%,
+      rgba(0, 0, 0, 0.45) 52%, rgba(0, 0, 0, 0.6) 58%,
+      transparent 65%, transparent 72%,
+      rgba(0, 0, 0, 0.55) 78%, rgba(0, 0, 0, 0.4) 82%,
+      transparent 88%, transparent 100%
+    );
+  animation: train-slide 24s linear infinite;
+}
+
+/* Front trees: faster */
+.train-trees--front .train-trees-inner {
+  background-size: 50% 100%;
+  background-repeat: repeat-x;
+  background-image:
+    linear-gradient(90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.55) 5%, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0.5) 15%,
+      transparent 22%, transparent 38%,
+      rgba(0, 0, 0, 0.6) 42%, rgba(0, 0, 0, 0.75) 48%,
+      transparent 55%, transparent 68%,
+      rgba(0, 0, 0, 0.5) 72%, rgba(0, 0, 0, 0.65) 78%,
+      transparent 85%, transparent 100%
+    );
+  animation: train-slide 14s linear infinite;
+}
+
+/* Dappled light: soft moving spots (sun through leaves) */
+.train-dapple {
+  position: absolute;
+  inset: 0;
+  width: 200%;
+  height: 100%;
+  background-size: 50% 100%;
+  background-repeat: repeat-x;
+  background-image: radial-gradient(circle at 20% 50%, rgba(251, 191, 36, 0.16) 0%, transparent 12%),
+    radial-gradient(circle at 60% 30%, rgba(253, 186, 116, 0.1) 0%, transparent 10%);
+  animation: train-slide 20s linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes train-slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .train-trees-inner,
+  .train-dapple {
+    animation: none;
+  }
+  .train-sun {
+    opacity: 0.8;
+  }
+}
+
+/* Fluid overlay: soft warmth, no hard edges */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 120% 100% at 40% 50%, rgba(245, 158, 11, 0.06) 0%, transparent 40%),
+    radial-gradient(ellipse 100% 120% at 60% 50%, rgba(245, 158, 11, 0.03) 0%, transparent 45%);
+  pointer-events: none;
+}
+
+/* Fluid edge: very soft, gradual blend — no block, just a gentle fade */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse 90% 85% at 50% 50%,
+    transparent 0%,
+    transparent 40%,
+    rgba(11, 15, 20, 0.08) 55%,
+    rgba(11, 15, 20, 0.18) 70%,
+    rgba(11, 15, 20, 0.32) 82%,
+    rgba(11, 15, 20, 0.45) 92%,
+    rgba(11, 15, 20, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.logo:hover {
+  color: var(--accent);
+}
+
+.nav {
+  display: flex;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.nav a:hover {
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* Hero */
+.hero {
+  padding: 5rem 1.5rem 6rem;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 7vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  margin: 0 0 1.5rem 0;
+  background: linear-gradient(180deg, var(--text) 0%, var(--muted) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-tagline {
+  font-size: 1.25rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0 0 2rem 0;
+}
+
+.hero-cta {
+  margin: 0;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.875rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  color: var(--bg);
+  background: var(--accent);
+  border: none;
+  border-radius: 9999px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(245, 158, 11, 0.3);
+  background: #fbbf24;
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: none;
+}
+
+/* Strips: integrated with the page — no blocks, no halo; soft divider + typography only */
+.strip {
+  padding: 2.75rem 1.5rem;
+  text-align: center;
+  background: transparent;
+}
+
+/* Soft horizontal rule that fades at the edges — ties sections without a box */
+.strip::before {
+  content: '';
+  display: block;
+  width: 60%;
+  max-width: 280px;
+  height: 1px;
+  margin: 0 auto 2rem;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(248, 250, 252, 0.08) 20%,
+    rgba(248, 250, 252, 0.12) 50%,
+    rgba(248, 250, 252, 0.08) 80%,
+    transparent 100%
+  );
+}
+
+.strip p {
+  max-width: 560px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.strip strong {
+  color: var(--accent);
+}
+
+/* Sections */
+.section {
+  padding: 4rem 1.5rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.section h2 {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 700;
+  margin: 0 0 2rem 0;
+  text-align: center;
+}
+
+.section h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem 0;
+}
+
+.section p {
+  color: var(--muted);
+  margin: 0 0 1rem 0;
+}
+
+/* Steps */
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: opacity 0.2s;
+}
+
+.steps li:hover {
+  opacity: 1;
+}
+
+.steps li:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.step-num {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--bg);
+  background: var(--accent);
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.steps li:hover .step-num {
+  transform: scale(1.1);
+}
+
+/* Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--text);
+}
+
+.card-meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0 0 0.75rem 0;
+}
+
+.card-excerpt {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Story cards */
+.story-card {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid var(--accent);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.story-card:hover {
+  background: var(--surface-hover);
+  transform: translateX(4px);
+}
+
+.story-card h3 {
+  margin-top: 0;
+}
+
+.story-card .quote {
+  font-style: italic;
+  color: var(--muted);
+  margin: 1rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent);
+}
+
+/* CTA block */
+.cta-block {
+  text-align: center;
+}
+
+.cta-block p {
+  color: var(--muted);
+  margin: 0 0 1.5rem 0;
+}
+
+.email-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  max-width: 400px;
+  margin: 0 auto 0.5rem;
+}
+
+.email-form input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  transition: border-color 0.2s;
+}
+
+.email-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.email-form input::placeholder {
+  color: var(--muted);
+}
+
+.email-form .btn {
+  padding: 0.875rem 1.5rem;
+}
+
+.note {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+code {
+  font-size: 0.9em;
+  padding: 0.15em 0.4em;
+  background: var(--surface);
+  border-radius: 4px;
+  color: var(--accent);
+}
+
+/* App embed */
+.app-embed-wrap {
+  margin: 2rem 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--surface);
+}
+
+.app-embed-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 640px;
+  border: none;
+}
+
+.app-embed-placeholder {
+  padding: 4rem 2rem;
+  text-align: center;
+  color: var(--muted);
+  background: var(--surface);
+}
+
+.app-embed-placeholder a {
+  color: var(--accent);
+}
+
+/* Manifesto / longform */
+.manifesto {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.manifesto p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+.manifesto .lead {
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
+/* Footer */
+.footer {
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin-top: 4rem;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.footer .nav {
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* Page title */
+.page-hero {
+  padding: 3rem 1.5rem 2rem;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.page-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 800;
+  margin: 0 0 0.5rem 0;
+}
+
+.page-hero p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Blog post */
+.post-body {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+.post-body h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem 0;
+}
+
+.post-body p {
+  margin-bottom: 1.25rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .email-form {
+    flex-direction: column;
+  }
+  .email-form input {
+    min-width: 0;
+  }
+  .nav {
+    gap: 1rem;
+  }
+}

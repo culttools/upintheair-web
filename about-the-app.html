@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0c1222" />
+  <title>About the app — Up In The Air</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="train-window" aria-hidden="true">
+    <div class="train-bg"></div>
+    <div class="train-sun"></div>
+    <div class="train-trees train-trees--back"><div class="train-trees-inner"></div></div>
+    <div class="train-trees train-trees--front"><div class="train-trees-inner"></div></div>
+    <div class="train-dapple"></div>
+  </div>
+  <header class="header">
+    <a href="index.html" class="logo">Up In The Air</a>
+    <nav class="nav">
+      <a href="stories.html">Stories</a>
+      <a href="blog.html">Blog</a>
+      <a href="about-the-app.html">The app</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <h1>About the app</h1>
+      <p>How it works—privacy, safety, and technical.</p>
+    </section>
+
+    <section class="section">
+      <h2>Exactly how it works</h2>
+      <p>You add your travel: flights and trains, with places (airport or station codes) and time windows. We don’t use GPS or live location. We only use your itinerary.</p>
+      <p>Our system finds other users whose itineraries overlap with yours—same place (e.g. Denver, Gare du Nord) and overlapping time. We don’t show “same flight” or “same train” in the feed. We show <strong>“on the way.”</strong> That’s deliberate: you stay in control of what you reveal. If you match, you see a time and place where you <em>could</em> meet (e.g. “DEN, 2–5pm”). Where you actually meet—coffee, lounge, gate—is up to you.</p>
+      <p>You swipe like or pass. If you both like, it’s a match. You then see the overlap window. No obligation to meet; no live tracking.</p>
+
+      <h3>Privacy</h3>
+      <p>We never show your exact flight, train, or seat. Discovery is itinerary-based only: place + time window. We don’t sell or share your travel data. We don’t use your location after you’ve entered a trip. You can add trips manually, by forwarding confirmation emails, or by connecting your calendar—we treat that data as sensitive and access-controlled.</p>
+
+      <h3>Safety</h3>
+      <p>“On the way” instead of “same flight” reduces the chance someone uses the app to target you on a specific plane or train. You choose whether to reveal more after matching. We support reporting and moderation. Meeting in a public place (airport, station, lounge) is built into the product—you’re never asked to share a home address.</p>
+
+      <h3>Technical</h3>
+      <p>The app is built to run on the web and as a native-style experience. We use <strong>LynxJS</strong> where it fits: one codebase for iOS, Android, and web, with a React-like model so we can ship quickly and keep the experience consistent. The current proof-of-concept is a PWA (install from the browser); the production app can be delivered via Lynx for native stores while keeping the same logic and design. The backend stores only what’s needed for matching and auth—no surplus tracking.</p>
+
+      <h2 id="try">Try the app</h2>
+      <p>When the app is deployed, it will appear below. You can use it in this tab or open it in a new window. Sign up, add a trip (e.g. place code DEN, tomorrow 2–6pm), and see who’s on the way.</p>
+
+      <div class="app-embed-wrap">
+        <!-- When the app is deployed, add its URL below and remove the placeholder div. -->
+        <div class="app-embed-placeholder" id="app-placeholder">
+          <p><strong>Try the app</strong></p>
+          <p>When you deploy the app (Vercel, GitHub Pages, etc.), open <code>about-the-app.html</code>, set the iframe <code>src</code> to your app URL, and remove this placeholder. The app will load here so people can use it in this tab.</p>
+          <p><a href="index.html#coming" class="btn">Get notified when it’s live</a></p>
+        </div>
+        <!-- <iframe title="Up In The Air app" src="https://your-app-url.vercel.app"></iframe> -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Up In The Air — Meet people on your way. By <a href="about.html" style="color: var(--accent);">Cult</a>.</p>
+    <nav class="nav">
+      <a href="stories.html">Stories</a>
+      <a href="blog.html">Blog</a>
+      <a href="about-the-app.html">The app</a>
+      <a href="about.html">About</a>
+    </nav>
+  </footer>
+</body>
+</html>
