@@ -20,6 +20,9 @@
   </div>
   <header class="header">
     <a href="index.html" class="logo">Up In The Air</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <nav class="nav">
       <a href="stories.html">Stories</a>
       <a href="blog.html">Blog</a>
@@ -74,16 +77,19 @@
       <p style="text-align: center; color: var(--muted); margin-bottom: 2rem;">Travel, points, and the weird psychology of meeting in between.</p>
       <div class="card-grid">
         <a href="blog-combining-points.html" class="card">
+          <img class="card-img" src="https://images.unsplash.com/photo-1678373493966-2ba1c4cd25fa?auto=format&fit=crop&w=400&q=80" alt="Airplane wing above clouds at sunset" loading="lazy" />
           <span class="card-meta">Travel</span>
           <h3 class="card-title">Combining points and meeting people</h3>
           <p class="card-excerpt">Why your layover strategy might be the best dating filter you never asked for.</p>
         </a>
         <a href="blog-romance-dead.html" class="card">
+          <img class="card-img" src="https://images.unsplash.com/photo-1706766810141-78232aacbe08?auto=format&fit=crop&w=400&q=80" alt="View from a train window over green valley" loading="lazy" />
           <span class="card-meta">Essay</span>
           <h3 class="card-title">Is romance dead after the apps?</h3>
           <p class="card-excerpt">Or just relocated to gate B12 and the 6:42 to Paddington?</p>
         </a>
         <a href="blog-behavioral-cues.html" class="card">
+          <img class="card-img" src="https://images.unsplash.com/photo-1768967645513-ee6aa33c9ffb?auto=format&fit=crop&w=400&q=80" alt="People waiting in airport terminal" loading="lazy" />
           <span class="card-meta">Behavior</span>
           <h3 class="card-title">Dating when nothing’s guaranteed</h3>
           <p class="card-excerpt">Behavioral cues in situations where you might never see each other again.</p>
@@ -113,6 +119,7 @@
     </nav>
   </footer>
 
+  <script src="main.js"></script>
   <script>
     document.getElementById('notify').addEventListener('submit', function(e) {
       e.preventDefault();
